@@ -1,0 +1,24 @@
+.login form {
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+}
+
+body.login div#login form#loginform p.forgetmenot,
+body.login div#login form#loginform p.forgetmenot label {
+    margin-left: 4px;
+}
+
+body.login div#login form#loginform {
+    background: none;
+}
+
+body.login div#login form#loginform input {
+    background: none;
+    box-shadow: none;
+}
+
+body.login div#login form#loginform p label,
+body.login div#login form#loginform div label {
+    font-size: 18px;
+}

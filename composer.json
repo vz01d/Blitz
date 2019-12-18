@@ -1,0 +1,23 @@
+{
+    "name": "42geeks/blitz",
+    "description": "⚡️⚡️⚡️ Lightning ⚡️⚡️⚡️ fast WP Theme built using sveltejs, tailwindcss, purgecss and smelte.",
+    "type": "project",
+    "license": "GPLv2+",
+    "authors": [
+        {
+            "name": "Sebo",
+            "email": "sebo@42geeks.gg"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "johnbillion/extended-cpts": "^4.3",
+        "stoutlogic/acf-builder": "^1.8",
+        "paragonie/halite": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "blitz\\": "./classes"
+        }
+    }
+}

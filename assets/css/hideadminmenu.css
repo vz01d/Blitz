@@ -1,0 +1,14 @@
+#adminmenuback,#adminmenuwrap{display: none !important;}
+#wpcontent, #footer { margin-left: 0px !important; }
+.edit-post-header {
+    left: 0 !important;
+    top: 0 !important;
+}
+
+.edit-post-layout__content {
+    margin-left: 0px !important;
+}
+
+.edit-post-sidebar {
+    top: 55px;
+}

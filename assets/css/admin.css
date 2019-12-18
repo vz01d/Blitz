@@ -1,0 +1,28 @@
+.button-primary {
+    transition: 0.6s;
+}
+
+#blitz-modal {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+#blitz-modal .modal-content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#blitz-m-close {
+    position: fixed;
+    top: 15px;
+    right: 60px;
+}
+
+.wp-block {
+    max-width: 100% !important;
+}
