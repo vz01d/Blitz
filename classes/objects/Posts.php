@@ -79,4 +79,24 @@ class Posts extends BlitzObjects implements BlitzObject
     public function loadObject(): void
     {
     }
+    
+    /**
+     * Load rest fields
+     * 
+     * @return void
+     */
+    public function loadRestFields(): void
+    {
+        add_action('rest_api_init', function() {
+            register_rest_field('post', 'slider', [
+                'get_callback' => function($atts) {
+                    return get_field('page_slider', $atts['id']) ?? false;
+                },
+                'schema' => [
+                    'description' => 'the slider for the page',
+                    'type'        => 'integer'
+                ]
+            ]);
+        });
+    }
 }

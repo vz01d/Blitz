@@ -387,16 +387,12 @@ class Settings extends BlitzObjects implements BlitzObject, BlitzApiObject
      */
     public function getSettings(\WP_REST_Request $request): \WP_REST_Response
     {
-        $chunkToLoad = $request->get_param('load');
-        if ('content' === $chunkToLoad) {
-            $postId = $request->get_header('F-PID');
-            $settings = $this->frontend()->getChunkdata($chunkToLoad, intval($postId));
+        $postId = $request->get_header('B-PID');
+        if (false != $postId) {
+            $settings = $this->frontend()->getSettings($postId);
+            $returnCode = 200;
         } else {
-            $settings = $this->frontend()->getChunkdata($chunkToLoad);
-        }
-
-        $returnCode = 200;
-        if (isset($settings['is404']) && true === $settings['is404']) {
+            $settings['is404'] = true;
             $returnCode = 404;
         }
 

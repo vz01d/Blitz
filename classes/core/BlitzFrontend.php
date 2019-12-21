@@ -36,46 +36,70 @@ class BlitzFrontend
 		show_admin_bar($showAdminBar);
         add_action('wp_enqueue_scripts', [$assets, 'enqueueFrontendAssets']);
         add_action('get_footer', [$assets, 'enqueueFooterCss']);
-	}
-	
-	/**
-	 * Get data for the specific chunk of the page for example the header, footer or content
-	 * there maybe data available to all chunks
+
+        BlitzApi::registerEndpoint(
+            'content',
+            [$this, 'getContent']
+        );
+    }
+    
+    /**
+     * Return the page content
      * 
-     * @param string $chunk - the chunk to load
-     * @param int $postId (optional) - the post or page id the content is to
-     * be fetched from
+     * @param \WP_REST_Request $request - the request object
      * 
-	 * @return array - all required page data for the requested chunk
-	 */
-	public function getChunkdata(string $chunk, int $postId = 0): array
-	{
-        $possibleChunks = [
+     * @return \WP_REST_Response - the page content object which may
+     * includes navigation, slider images or post content rendered
+     */
+    public function getContent(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $parts = [
             'header',
-            'footer',
-            'content'
+            'content',
+            'footer'
         ];
 
-        if (!in_array($chunk, $possibleChunks)) {
-            $chunk = 'header';
+        $postId     = $request->get_header('B-PID');
+        $part       = $request->get_param('load');
+        if (false === in_array($part, $parts)) {
+            $part = 'header';
         }
 
-        $data = [];
-        if (is_callable([$this, $chunk])) {
-            if ('content' === $chunk){
-                $data = $this->$chunk($postId);
-            } else {
-                $data = $this->$chunk();
-            }
+        $returnCode = 200;
+        
+        if ('header' === $part) {
+            $content['navigation'] = $this->_getNavigation(['main', 'top']);
+            $content['baseUrl']    = Blitz::$siteUrl;
         }
 
-        // apply these to all requests
-        // colors
-        $data['textColor'] = get_field('frontend_text_color', 'option');
+        $response = new \WP_REST_Response($content, $returnCode);
+        return $response;
+    }
+	
+	/**
+	 * Get frontend settings (colors, hidden items etc.)
+     * 
+     * @param int $postId (optional) - the post or page id the content is to
+     * be fetched for - posts and pages can have their header hidden, no navigation etc.
+     * 
+	 * @return array - all settings to built the page
+	 */
+	public function getSettings(int $postId): array
+	{
+        $data['textColor']       = get_field('frontend_text_color', 'option');
         $data['backgroundColor'] = get_field('frontend_background_color', 'option');
+        $data['showHeader']      = get_field('show_header', 'option');
+        if (true === $data['showHeader']) {
+            $data['showNavigation'] = get_field('show_navigation', 'option');
+        }
 
-        // base Url
-        $data['baseUrl'] = Blitz::$siteUrl;
+        /* 
+            we include the logo url here since we
+            do not want to have the logo in header
+            for some layouts
+        */
+        $logo = get_field('logo', 'option');
+        $data['logoUrl'] = $logo['url'];
 
         return $data;
     }
@@ -111,7 +135,7 @@ class BlitzFrontend
      * 
      * @return array - the settings for the content
      */
-    public function content(int $postId): array
+    private function content(int $postId): array
     {
 		/* 
 			TODO: currentId is false when no static page is 

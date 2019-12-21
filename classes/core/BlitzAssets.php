@@ -212,14 +212,20 @@ class BlitzAssets extends BlitzObjects implements BlitzAsset
             true
         );
 
+        $id = get_the_ID();
+        $pt = get_post_type($id);
         wp_localize_script(
             'blitz-frontend',
             'BLITZ',
             [
-                'nonce'     => wp_create_nonce('wp_rest'),
-                'restBase'  => esc_url_raw(rest_url()),
-                'restUrl'   => esc_url_raw(rest_url().'blitz/' . \blitz\core\BlitzApi::API_VERSION),
-                'currentID' => get_the_ID()
+                'nonce'       => wp_create_nonce('wp_rest'),
+                'restBase'    => esc_url_raw(rest_url()),
+                'settingsUrl' => esc_url_raw(rest_url().'blitz/' . \blitz\core\BlitzApi::API_VERSION.'/settings'),
+                'contentUrl'  => esc_url_raw(rest_url().'blitz/' . \blitz\core\BlitzApi::API_VERSION.'/content'),
+                'slidesUrl'   => esc_url_raw(rest_url().'blitz/' . \blitz\core\BlitzApi::API_VERSION.'/slides'),
+                'currentID'   => $id,
+                'pt'          => $pt != false ? $pt.'s' : false,
+                'siteBase'    => Blitz::$siteUrl
             ]
         );
         

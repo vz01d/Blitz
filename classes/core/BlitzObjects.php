@@ -53,6 +53,11 @@ class BlitzObjects extends Blitz
                     $o->registerEndpoints();
                 }
 
+                // not all objects require this
+                if (true === is_callable([$o, 'loadRestFields'])) {
+                    $o->loadRestFields();
+                }
+
                 $this->_objects[$this->_getName($o)] = $o;
             }
         }, $objects);
