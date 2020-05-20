@@ -2,6 +2,8 @@
 an OOP WordPress theme using sveltejs and smelte
 you can read more about both technologies here:
 
+*MAINTAIN NOTE: * this will not be improved further for several reasons (acf pro requirement for example). Feel free to use the code as you like, copy any concepts, modify, redistribute as you wish. *NOT MAINTAINED USE AT YOUR OWN RISK*
+
 https://svelte.dev  
 https://github.com/matyunya/smelte
 
@@ -44,5 +46,3 @@ This Theme is entirely focused on Gutenberg, it ships no fancy pagebuilder and d
 
 ## Licensing
     The theme is opensource and free to use for anyone on personal or non-profit projects as well as commercial ones. However if you consider using the Theme for any commercial Projects it would be great if you contribute to further developments of the theme by funding me.  
-
-    You may **not** sell the theme as yours.
