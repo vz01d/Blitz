@@ -2,7 +2,7 @@
 an OOP WordPress theme using sveltejs and smelte
 you can read more about both technologies here:
 
-*MAINTAIN NOTE: * this will not be improved further for several reasons (acf pro requirement for example). Feel free to use the code as you like, copy any concepts, modify, redistribute as you wish. *NOT MAINTAINED USE AT YOUR OWN RISK*
+**MAINTAIN NOTE: ** this will not be improved further for several reasons (acf pro requirement for example). Feel free to use the code as you like, copy any concepts, modify, redistribute as you wish. **NOT MAINTAINED USE AT YOUR OWN RISK**
 
 https://svelte.dev  
 https://github.com/matyunya/smelte
